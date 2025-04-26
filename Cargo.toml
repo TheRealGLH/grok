@@ -2,6 +2,9 @@
 name = "grok-is-this-real"
 version = "1.0.0"
 edition = "2021"
+description = "A Discord bot that \"helps\" discern the truth."
+license = "MIT"
+repository = "https://github.com/TheRealGLH/grok"
 
 [dependencies]
 serenity = "0.12"
