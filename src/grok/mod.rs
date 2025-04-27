@@ -51,19 +51,23 @@ impl EventHandler for Handler {
                 if p != ctx.cache.current_user().id {
                     break;
                 };
-                parse_message(&ctx.http, &msg).await;
+                parse_mentioned_message(&ctx.http, &msg).await;
             }
         }
     }
 }
 
-async fn parse_message(cache_http: impl CacheHttp, message: &Message) {
+async fn parse_mentioned_message(cache_http: impl CacheHttp, message: &Message) {
     let lowercase = message.content.to_lowercase();
-    if !lowercase.contains("is this true") && !lowercase.contains("is this real") {
-        println!("invalid message. ignoring");
-        return;
+    let mut response: String = String::from("girl, idk.");
+    if lowercase.contains("is this true")
+        || lowercase.contains("is this real")
+        || lowercase.contains("is that real")
+        || lowercase.contains("is that true")
+    {
+        response = pick_true_message();
     }
-    if let Err(error_reason) = message.reply(cache_http, pick_true_message()).await {
+    if let Err(error_reason) = message.reply(cache_http, response).await {
         eprintln!("Error sending message: {error_reason:?}");
     }
 }
