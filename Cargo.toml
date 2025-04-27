@@ -1,6 +1,6 @@
 [package]
 name = "grok-is-this-real"
-version = "1.0.1"
+version = "1.0.2"
 edition = "2021"
 description = "A Discord bot that \"helps\" discern the truth."
 license = "MIT"
