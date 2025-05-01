@@ -84,7 +84,7 @@ async fn parse_mentioned_message(cache_http: impl CacheHttp, message: &Message) 
         || lowercase.contains("is that true")
     {
         response = pick_true_message();
-    } else if lowercase.ends_with('?') {
+    } else if message.content.ends_with("?") {
         response = pick_generic_answer();
     }
     if let Err(error_reason) = message.reply(cache_http, response).await {
@@ -97,5 +97,5 @@ fn pick_true_message() -> String {
 }
 
 fn pick_generic_answer() -> String {
-    String::from(ANSWERS_GENERIC[thread_rng().gen_range(0..ANSWERS_TRUE_FALSE.len())])
+    String::from(ANSWERS_GENERIC[thread_rng().gen_range(0..ANSWERS_GENERIC.len())])
 }
